@@ -5,7 +5,7 @@ void WavAnalyzer::Open()
 {
 	if (!File.is_open())
 	{
-		File.open(PathToWav, std::ios::binary | std::ios::in);
+        File.open(PathToWav, std::ios::binary | std::ios::in);
 		if (!File.is_open())
 		{
 			std::cout << "\nWrong file path or name!";
@@ -56,7 +56,7 @@ WavAnalyzer::AnalyzeRes WavAnalyzer::Analyze()
 	}
 	blocksAmm = Header.subchunk2Size / Header.blockAlign;
 	bool* BuffBlock = new bool[Header.bitsPerSample * Header.numChannels];
-	for (int i = 0; i < blocksAmm; ++i)
+    for (unsigned int i = 0; i < blocksAmm; ++i)
 	{
 		File.read((char*)BuffBlock, Header.blockAlign);
 		for (int j = 0; j < Header.numChannels; ++j)
@@ -66,8 +66,8 @@ WavAnalyzer::AnalyzeRes WavAnalyzer::Analyze()
 			// —читаем сколько сэмплов синусойда проходит, перед тем как пройти два раза через 0, первое полное колебание занимает 3 прохода, остальные 2
 			++ChannelsData[j].CounterSamples;
 			// ‘иксируем, когда синусойда проходит через 0
-			if (Amplitude == 0.0f or Amplitude < -0.0f and ChannelsData[j].LastAmplitude > +0.0f
-				or Amplitude > +0.0f and ChannelsData[j].LastAmplitude < -0.0f)
+            if ((Amplitude == 0.0f) || (Amplitude < -0.0f) && (ChannelsData[j].LastAmplitude > +0.0f)
+                || (Amplitude > +0.0f) && (ChannelsData[j].LastAmplitude < -0.0f))
 			{
 				if (++ChannelsData[j].CounterViaZero == 3)
 				{

@@ -83,5 +83,3 @@ Contributions are welcome! If you have suggestions for improvements or found a b
 ## Contact
 
 For any inquiries or feedback, please open an issue on the [GitHub repository](https://github.com/KOJIMEISTER/wav_max_min_hz).
-
-```
